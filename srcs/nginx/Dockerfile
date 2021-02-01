@@ -17,4 +17,3 @@ RUN     ssh-keygen -A
 RUN     chmod +x /init.sh
 RUN     mkdir /run/nginx/
 CMD     /init.sh
-EXPOSE 22 80 443
