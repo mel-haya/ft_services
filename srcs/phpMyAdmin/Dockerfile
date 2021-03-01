@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.12
 
 RUN		apk update
 RUN		apk add nginx wget bash supervisor openrc
@@ -12,6 +12,8 @@ RUN     tar -xzvf phpMyAdmin-5.0.4-english.tar.gz -C /www
 RUN     mv /www/phpMyAdmin-5.0.4-english /www/phpMyAdmin
 RUN     adduser -D -g 'www' www
 RUN     chown -R www:www /www/phpMyAdmin
+COPY    srcs/config.inc.php /www/phpMyAdmin/config.inc.php
 RUN     mkdir /run/nginx/
+RUN     mkdir /www/phpMyAdmin/tmp && chmod 777 /www/phpMyAdmin/tmp
 RUN     openrc reboot
 CMD     ["/usr/bin/supervisord" , "-c", "/etc/supervisor/conf.d/supervisord.conf"]

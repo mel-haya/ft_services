@@ -1,0 +1,36 @@
+
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
+  name: mysql
+spec:
+  selector:
+    app: mysql
+  ports:
+    - port: 3306
+      targetPort: 3306
+  type: ClusterIP
+  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3306
+  selector:
+    matchLabels:
+      app: mysql 
