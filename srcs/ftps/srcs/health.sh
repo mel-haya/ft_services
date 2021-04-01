@@ -1,6 +1,6 @@
-process=`ps | grep -E "nginx: master|sshd"|grep -v grep|wc -l`;
+process=`ps | grep vsftpd |grep -v grep|wc -l`;
 
-if [ $process -eq 2 ]
+if [ $process -ge 1 ]
 then exit 0
 else exit 1
 fi
