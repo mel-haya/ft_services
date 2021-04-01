@@ -1,11 +1,11 @@
 FROM alpine:3.12
 
 RUN		apk update
-RUN		apk add nginx openssl bash openssh supervisor openrc
+RUN		apk add nginx openssl bash openssh openrc
 COPY    srcs/default.conf /etc/nginx/conf.d
-COPY    srcs/init.sh /
+COPY    srcs/init.sh .
+COPY    srcs/health.sh .
 COPY    srcs/index.html /www/index.html
-COPY    srcs/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN     mkdir /etc/nginx/ssl
 
 RUN     adduser -D -g 'www' www
@@ -19,4 +19,4 @@ RUN     ssh-keygen -A
 
 RUN     mkdir /run/nginx/
 EXPOSE 80 443 22
-CMD     ["/usr/bin/supervisord" , "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD     bash init.sh

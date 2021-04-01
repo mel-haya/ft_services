@@ -4,6 +4,7 @@ RUN apk add vsftpd openssl bash openrc
 RUN openrc reboot
 COPY srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY srcs/start.sh .
+COPY srcs/health.sh .
 RUN adduser admin -D && echo "admin:123" |chpasswd
 RUN mkdir -p /home/admin
 RUN mkdir -p /etc/ssl

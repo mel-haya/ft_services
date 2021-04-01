@@ -39,6 +39,13 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 80
+          livenessProbe:
+            exec:
+              command:
+              - sh
+              - health.sh
+            initialDelaySeconds: 5
+            periodSeconds: 5
   selector:
     matchLabels:
       app: nginx

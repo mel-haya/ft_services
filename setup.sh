@@ -8,6 +8,8 @@ docker build srcs/nginx -t nginx
 docker build srcs/Wordpress -t wordpress
 docker build srcs/mysql -t mysql
 docker build srcs/ftps -t ftps
+docker build srcs/grafana -t grafana
+docker build srcs/influxdb -t influxdb
 
 minikube addons enable metallb
 
